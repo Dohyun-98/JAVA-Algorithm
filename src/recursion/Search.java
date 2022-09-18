@@ -17,13 +17,33 @@ public class Search {
 //        return -1;
 //    }
     //이 함수의 미션은 data[begin]에서 data[end] 사이에 target 검색한다, 즉 검색 구간의 시작점을 명시적으로 지정한다.
-    public static int search(int data[], int begin,int end, int target){
-        if(begin>end){   //검색할 데이터의 개수
+    //외부에서 넣어주는 매개변수만을 생각하지말고, 재귀호출시, 필요한 매개변수를 생각하여 설계하여야 한다.
+//    public static int search(int data[], int begin,int end, int target){
+//        if(begin>end){   //검색할 데이터의 개수
+//            return -1;
+//        }else if(target==data[begin]){
+//            return begin;
+//        }else{
+//            return search(data,begin+1,end,target);
+//        }
+//    }
+
+
+    public static int search(int data[], int begin, int end, int target) {
+        if (begin > end) {
             return -1;
-        }else if(target==data[begin]){
-            return begin;
-        }else{
-            return search(data,begin+1,end,target);
+        } else {
+            int middle = (begin + end) / 2;
+            if (data[middle] == target) {
+                return middle;
+            }
+            int index = search(data, begin, middle - 1, target);
+            if (index != -1) {
+                return index;
+            } else {
+                return search(data, middle + 1, end, target);
+            }
         }
     }
+
 }
